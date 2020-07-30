@@ -33,6 +33,32 @@ public class Brand extends javax.swing.JFrame {
     }
 
 
+    DefaultTableModel d;
+    public void loadDetails(){
+        Connection conn=connect();
+        d=new DefaultTableModel();
+        d=(DefaultTableModel)jTable1.getModel();// this is used to get the bluprint of the table
+        d.setRowCount(0);
+        try {
+            PreparedStatement p=conn.prepareStatement("select * from brand");
+            ResultSet r=p.executeQuery();
+            
+            while(r.next()){
+                Vector v=new Vector();
+                v.add(r.getString("id"));
+                v.add(r.getString("name"));
+                v.add(r.getString("status"));
+                
+                d.addRow(v);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Brand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
 
 
     /**
