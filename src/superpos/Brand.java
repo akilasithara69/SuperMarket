@@ -16,7 +16,24 @@ public class Brand extends javax.swing.JFrame {
      */
     public Brand() {
         initComponents();
+        loadDetails();
     }
+
+    // make the connection
+    Connection con; // this is used to create the class
+    public Connection connect(){
+         try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection("jdbc:mysql://localhost/supermarket","root","");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Brand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         return con;
+    }
+
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
